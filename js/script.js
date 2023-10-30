@@ -1,21 +1,27 @@
 // prelevo elemento html
 const gridElem = document.querySelector(".grid");
 
+const bombs = arrayBombs(100);
+console.log(bombs);
+let gameOver = false;
+
 // ciclo for 
 
  for (let i = 1; i < 100; i++) {
         const cell = generateGridCell(i + 1);
         cell.addEventListener("click", eventClick);
         gridElem.appendChild(cell);
-}
+ }
 
 
+ 
 
 //******************************+
 //           FUNZIONI 
 //******************************* 
 
-// aggiunge un numero in una cella  
+
+// genera una cella della griglia e aggiunge il numero come contenuto 
 function generateGridCell(cellNumber) {
     const cellElem = document.createElement("div");
     cellElem.classList.add("cell");
@@ -24,16 +30,29 @@ function generateGridCell(cellNumber) {
     return cellElem;
 }
 
+
 // aggiunge un evento al click della cella (cambia colore )
 function eventClick() {
+    if(gameOver) {
+        return;
+    }
+
     const clickNumber = parseInt(this.textContent);
     console.log(clickNumber);
-    this.classList.add("blue");   
+    this.classList.add("blue");  
+    console.log(bombs.includes(clickNumber))
+
+ if (bombs.includes(clickNumber)) {
+    this.classList.add("red");
+    
+    gameOver = true;
+ }
+
 }
 
 // genera numero random  
 function generateNumberRnd(min, max) {
-    return Math.floor(Math.random() * (max - min +1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // genera array di 16 numeri random senza ripetizione 
@@ -48,4 +67,4 @@ function arrayBombs(max) {
         return myArray;
     
 }
-console.log(arrayBombs(20));
+
