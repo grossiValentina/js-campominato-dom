@@ -14,7 +14,6 @@ let gameOver = false;
  }
 
 
- 
 
 //******************************+
 //           FUNZIONI 
@@ -34,6 +33,9 @@ function generateGridCell(cellNumber) {
 // aggiunge un evento al click della cella (cambia colore )
 function eventClick() {
     if(gameOver) {
+        const result = document.querySelector("h4");
+        result.innerHTML = `<h4 class="result">Hai vinto!</h4>`
+
         return;
     }
 
@@ -44,6 +46,9 @@ function eventClick() {
 
  if (bombs.includes(clickNumber)) {
     this.classList.add("red");
+    const result = document.querySelector("h4")
+    result.innerHTML = `<h4 class="result">Hai perso</h4>`
+    console.log(result)
     
     gameOver = true;
  }
